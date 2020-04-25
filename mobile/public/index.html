@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <base href="./" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="logo192.png" />
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <title>Movilizer</title>
+
+  <script src="codemirror/lib/codemirror.js"></script>
+  <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+  <script src="codemirror/mode/javascript/javascript.js"></script>
+  <script src="codemirror/mode/xml/xml.js"></script>
+  <script src="codemirror/mode/jsx/jsx.js"></script>
+</head>
+
+<body onload='reloadjs()'>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <script>
+    function load_js(filename) {
+      var body = document.getElementsByTagName('body')[0];
+      var script = document.createElement('script');
+      script.src = filename;
+      body.appendChild(script);
+    }
+    
+    function reloadjs() {
+      let e = document.getElementsByTagName("script");
+      for (let item of e) {
+        if (item.src && item.src.startsWith("file:///static")) {
+          load_js(item.src.replace("file:///",""));
+        }
+      }
+      console.clear();
+    }
+  </script>
+</body>
+
+</html>

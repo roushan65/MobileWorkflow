@@ -1,0 +1,45 @@
+{
+  "name": "native-workflow-engine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "pod-install":"cd ios && pod install",
+    "debug-electron": "react-scripts build && cp -r platform/electron/electron.js ./electron.js && electron ./electron.js && rm electron.js && rm -r build",
+    "release-electron": "react-scripts build && cp -r platform/electron/electron.js build && electron-builder --dir && rm -r build",
+    "debug-ios": "react-native run-ios --configuration Debug",
+    "release-ios": "react-native bundle --platform ios --dev false --minify true --entry-file platform/mobile/mobile.js --bundle-output movelet/main.jsbundle && react-native run-ios --configuration Release --no-packager",
+    "debug-android": "react-native run-android --variant debug",
+    "release-android": "react-native run-android --variant release",
+    "start-metro": "react-native start",
+    "start-movelet-server": "http-server ./movelet"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-standalone": "^6.26.0",
+    "java": "^0.12.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-native-web": "^0.11.7"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "electron": "^6.1.5",
+    "electron-builder": "^21.2.0",
+    "react-scripts": "^2.1.8",
+    "react-native": "0.61.4",
+    "http-server": "^0.11.1"
+  },
+  "build": {
+    "appId": "com.mocilizer.client",
+    "mac": {
+      "category": "com.mocilizer.client.mac"
+    }
+  }
+}
