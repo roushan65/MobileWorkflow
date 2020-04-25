@@ -1,0 +1,11 @@
+node_modules
+android/.gradle
+android/.idea
+android/app/build/*
+dist
+ios/build
+ios/Pods
+ios/Podfile.lock
+build/*
+local
+ios/mov_rct_ntv.xcworkspace/xcuserdata
