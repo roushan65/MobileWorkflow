@@ -6,10 +6,10 @@ import * as Babel from 'babel-standalone';
 
 // let jsxServerURL = "http://10.0.2.2:8080/mov1.jsx";
 // let jsxServerURL = "movelet/mov1.jsx";
-let jsxServerURL = "http://localhost:8080/mov1.jsx";
+let jsxServerURL = "http://localhost:3000/workflow/wf1/main.jsx?dev=true";
 
 if(Native.Platform.OS == "android"){
-  jsxServerURL = "http://10.0.2.2:8080/mov1.jsx";
+  jsxServerURL = "http://10.0.2.2:3000/workflow/wf1/main.jsx?dev=true";
 }
 
 class MyReact{
@@ -34,8 +34,9 @@ export default class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this.movilizer={exports:null};
     this.state = {
-      jsx: "<Native.Text>Loading Movelet from "+jsxServerURL+"...</Native.Text>",
+      jsx: 'movilizer.exports = React.createElement(Native.Text, null, "Loading Movelet from '+jsxServerURL+'...");',
       refreshing:false
     }
   }
@@ -73,8 +74,10 @@ export default class App extends React.Component {
   }
 
   render(){
-    let code = Babel.transform(this.state.jsx,{presets:["react"]}).code;
-    let VMFun = Function("fetch","window","React","Native","Workflow","State","Controller","MovView","return "+code);
+    let code = this.state.jsx; //No need to transpile the code as it is already transpile from AppServer
+    // let code = Babel.transform(this.state.jsx,{presets:["react"]}).code;
+    let VMFun = Function("fetch","window","React","Native","Workflow","State","Controller","MovView","movilizer","eval(`"+code+"`);");
+    VMFun(fetch,"CustomWindowObject",MyReactImpl,Native,"Workflow","State","Controller","MovView",this.movilizer);
     return (
       <Native.SafeAreaView style={styles.container}>
         <Native.ScrollView
@@ -83,7 +86,7 @@ export default class App extends React.Component {
             <Native.RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
           }
         >
-        {React.cloneElement(VMFun("MyFetch","ThisIsMyWindow",MyReactImpl,Native,"Workflow","State","Controller","MovView"),{key:Math.random()})}
+        {React.cloneElement(this.movilizer.exports,{key:Math.random()})}
         </Native.ScrollView>
       </Native.SafeAreaView>
     );

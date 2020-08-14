@@ -4,7 +4,7 @@
   "description": "web server for serving the movilizer workflow.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "app-server": "node main.js"
   },
   "author": "Roushan Singh",
   "license": "ISC",

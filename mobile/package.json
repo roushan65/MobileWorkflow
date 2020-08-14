@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/index.js",
   "scripts": {
-    "pod-install":"cd ios && pod install",
+    "pod-install": "cd ios && pod install",
     "debug-electron": "react-scripts build && cp -r platform/electron/electron.js ./electron.js && electron ./electron.js && rm electron.js && rm -r build",
     "release-electron": "react-scripts build && cp -r platform/electron/electron.js build && electron-builder --dir && rm -r build",
     "debug-ios": "react-native run-ios --configuration Debug",
