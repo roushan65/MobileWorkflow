@@ -30,7 +30,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "electron": "^6.1.5",
+    "electron": "^15.5.5",
     "electron-builder": "^21.2.0",
     "react-scripts": "^2.1.8",
     "react-native": "0.61.4",
